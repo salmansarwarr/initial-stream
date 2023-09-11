@@ -21,7 +21,7 @@ const convertPrice = (
         return convertedPrice.toFixed(2);
     }
 
-    if (price) return price;
+    if (price) return price.toLocaleString();
     else return "-";
 };
 
