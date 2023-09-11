@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
-import { setCurrency, setNativeCurrency } from "../redux/slices/iCloudSlice";
+import { setCurrency } from "../redux/slices/iCloudSlice";
 import { CurrencyRates, iCloudData } from "../Interfaces/interfaces";
 import Select from "react-select";
 import ScrollToTopButton from "./ScrollToTop";
@@ -242,7 +242,6 @@ const SummaryTableICloud = ({
         try {
             currency = localStorage.getItem("userCurrency") || "USD";
 
-            dispatch(setNativeCurrency(currency));
             dispatch(setCurrency(currency));
         } catch (error) {
             console.log(error);
