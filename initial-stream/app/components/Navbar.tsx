@@ -118,7 +118,35 @@ const Navbar = ({
                                     About Us
                                 </Link>
                             </li>
-
+                            <li className="hidden w-full md:w-auto md:p-0 pl-4 py-1 md:flex items-center">
+                                <Select
+                                    options={currencyOptions}
+                                    value={
+                                        currency
+                                            ? {
+                                                  value: currency,
+                                                  label: `${currency} (${currencyData[currency]})`,
+                                              }
+                                            : null
+                                    }
+                                    onChange={(selectedOption) =>
+                                        pathname == "/netflix"
+                                            ? dispatch(
+                                                  setCurrency(
+                                                      selectedOption?.value
+                                                  )
+                                              )
+                                            : dispatch(
+                                                  iCloudCurrency(
+                                                      selectedOption?.value
+                                                  )
+                                              )
+                                    }
+                                    className="w-[265.23px] text-black"
+                                    isSearchable={true} // Enable search capabilities
+                                    placeholder="Search or select currency..."
+                                />
+                            </li>
                         </ul>
                     </p>
                 </div>
