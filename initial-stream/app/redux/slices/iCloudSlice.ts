@@ -10,22 +10,23 @@ interface State {
 
 const initialState: State = {
     nativeCurrency: "",
-    currency: "",
-    plans: ['50GB', '200GB', '2TB'],
+    //@ts-ignore
+    currency:
+        typeof window !== "undefined" && window.localStorage
+            ? localStorage.getItem("userCurrency")
+            : "",
+    plans: ["50GB", "200GB", "2TB"],
 };
 
 export const iCloudSlice = createSlice({
     name: "iCloud",
     initialState,
     reducers: {
-        setNativeCurrency: (state, action) => {
-            state.nativeCurrency = action.payload;
+        setCurrency: (state, action) => {
+            state.currency = action.payload;
             if (typeof window !== "undefined" && window.localStorage) {
                 localStorage.setItem("userCurrency", action.payload);
             }
-        },
-        setCurrency: (state, action) => {
-            state.currency = action.payload;
         },
         addPlan: (state, action) => {
             if (state.plans.includes(action.payload)) {
@@ -55,6 +56,5 @@ export const iCloudSlice = createSlice({
     },
 });
 
-export const { setNativeCurrency, setCurrency, addPlan, setPlans } =
-iCloudSlice.actions;
+export const { setCurrency, addPlan, setPlans } = iCloudSlice.actions;
 export default iCloudSlice.reducer;
