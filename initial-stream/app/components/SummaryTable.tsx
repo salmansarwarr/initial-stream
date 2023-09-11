@@ -5,10 +5,7 @@ import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import countriesList from "countries-list";
 import Loading from "./Loading";
-import {
-    setCurrency,
-    setNativeCurrency,
-} from "../redux/slices/netflixSlice";
+import { setCurrency } from "../redux/slices/netflixSlice";
 import { CurrencyRates, NetflixData } from "../Interfaces/interfaces";
 import Select from "react-select";
 import ScrollToTopButton from "./ScrollToTop";
@@ -71,7 +68,7 @@ const findCheapestPlans = (
     return cheapestPlans;
 };
 
-const planOrder = ["mobile", "basic", , "standard_ads", "standard","premium"];
+const planOrder = ["mobile", "basic", , "standard_ads", "standard", "premium"];
 
 const SummaryTable = ({
     currencyRates,
@@ -151,7 +148,7 @@ const SummaryTable = ({
         mobile: "asc",
         standard: "asc",
         premium: "asc",
-        standard_ads: "asc"
+        standard_ads: "asc",
     });
 
     const handleCountryChange = (newValue: any) => {
@@ -199,10 +196,10 @@ const SummaryTable = ({
             case "highest_standard_with_ads":
                 handleColumnSort("standard_ads", "desc");
                 break;
-            
+
             case "lowest_standard_with_ads":
-                    handleColumnSort("standard_ads", "asc");
-                    break;
+                handleColumnSort("standard_ads", "asc");
+                break;
 
             case "sort_country_az":
                 handleCountrySort("asc"); // Call the function to sort countries A to Z
@@ -245,7 +242,7 @@ const SummaryTable = ({
             mobile: "asc",
             standard: "asc",
             premium: "asc",
-            standard_ads: "asc"
+            standard_ads: "asc",
         });
         setFilteredData(
             sortedData.filter((countryData) => {
@@ -272,7 +269,6 @@ const SummaryTable = ({
         try {
             currency = localStorage.getItem("userCurrency") || "USD";
 
-            dispatch(setNativeCurrency(currency));
             dispatch(setCurrency(currency));
         } catch (error) {
             console.log(error);
@@ -464,7 +460,7 @@ const SummaryTable = ({
                                 : formatNumberWithCommas(
                                       Number(
                                           convertPrice(
-                                             //@ts-ignore
+                                              //@ts-ignore
                                               countryData[`${plan}EUR`],
                                               currencyRates,
                                               selectedCurrency
@@ -512,7 +508,11 @@ const SummaryTable = ({
                         return (
                             cheapestPlan?.country_code && (
                                 <p key={plan} className="mb-2">
-                                    <span className="capitalize">{plan == 'standard_ads' ? 'Standard with ads' : plan}</span>{" "}
+                                    <span className="capitalize">
+                                        {plan == "standard_ads"
+                                            ? "Standard with ads"
+                                            : plan}
+                                    </span>{" "}
                                     at{" "}
                                     <span className="font-semibold">
                                         {formatNumberWithCommasAndFixed(
