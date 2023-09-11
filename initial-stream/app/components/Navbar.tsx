@@ -39,12 +39,6 @@ const Navbar = ({
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isBrowseOpen, setIsBrowseOpen] = useState(false);
 
-    const handleCurrencyChange = (
-        event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-        dispatch(setCurrency(event.target.value));
-    };
-
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
     };
@@ -129,19 +123,16 @@ const Navbar = ({
                                               }
                                             : null
                                     }
-                                    onChange={(selectedOption) =>
-                                        pathname == "/netflix"
-                                            ? dispatch(
-                                                  setCurrency(
-                                                      selectedOption?.value
-                                                  )
-                                              )
-                                            : dispatch(
-                                                  iCloudCurrency(
-                                                      selectedOption?.value
-                                                  )
-                                              )
-                                    }
+                                    onChange={(selectedOption) => {
+                                        dispatch(
+                                            setCurrency(selectedOption?.value)
+                                        );
+                                        dispatch(
+                                            iCloudCurrency(
+                                                selectedOption?.value
+                                            )
+                                        );
+                                    }}
                                     className="w-[265.23px] text-black"
                                     isSearchable={true} // Enable search capabilities
                                     placeholder="Search or select currency..."
@@ -164,11 +155,16 @@ const Navbar = ({
                               }
                             : null
                     }
-                    onChange={(selectedOption) =>
-                        pathname == "/netflix"
-                            ? dispatch(setCurrency(selectedOption?.value))
-                            : dispatch(iCloudCurrency(selectedOption?.value))
-                    }
+                    onChange={(selectedOption) => {
+                        dispatch(
+                            setCurrency(selectedOption?.value)
+                        );
+                        dispatch(
+                            iCloudCurrency(
+                                selectedOption?.value
+                            )
+                        );
+                    }}
                     className="w-[265.23px] text-black"
                     isSearchable={true} // Enable search capabilities
                     placeholder="Search or select currency..."
