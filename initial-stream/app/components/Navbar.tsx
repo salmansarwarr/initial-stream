@@ -143,7 +143,7 @@ const Navbar = ({
                 </div>
             </div>
 
-            <div className="flex items-center justify-end mt-10 md:hidden">
+            <div className="flex items-center justify-end !mt-10 md:hidden">
                 {/* <label className="mr-2">Currency:</label> */}
                 <Select
                     options={currencyOptions}
